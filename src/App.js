@@ -1,13 +1,23 @@
-import {MantineProvider, Text } from "@mantine/core";
+import {Flex, MantineProvider, Text } from "@mantine/core";
 import InfoCard from "./Components/InfoCard";
 import '@mantine/core/styles.css'
 
 function App() {
   return (
     <MantineProvider>
-      <Text>Welcome</Text>
+      <Text>Baxture Assignment</Text>
+      <Flex direction={{ base: 'column', sm: 'row' }}
+      gap={{ base: 'sm', sm: 'lg' }}
+      justify={{ sm: 'center' }} wrap="wrap">
       <InfoCard />
       <InfoCard />
+      <InfoCard />
+      <InfoCard />
+      <InfoCard />
+      <InfoCard />
+      <InfoCard />
+      <InfoCard />
+      </Flex>
     </MantineProvider>
   );
 }
