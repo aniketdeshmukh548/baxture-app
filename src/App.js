@@ -8,14 +8,7 @@ function App() {
       <Text>Baxture Assignment</Text>
       <Flex direction={{ base: 'column', sm: 'row' }}
       gap={{ base: 'sm', sm: 'lg' }}
-      justify={{ sm: 'center' }} wrap="wrap">
-      <InfoCard />
-      <InfoCard />
-      <InfoCard />
-      <InfoCard />
-      <InfoCard />
-      <InfoCard />
-      <InfoCard />
+      justify={{ sm: 'center' }} wrap="wrap" pl={90}>
       <InfoCard />
       </Flex>
     </MantineProvider>
