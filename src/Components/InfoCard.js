@@ -6,7 +6,6 @@ import { initials } from '@dicebear/collection';
 
 const InfoCard = () => {
   const [user, setUser] = useState(null);
-  const [text,setText]=useState('Follow')
   const userData = async () => {
     const data = await fetch("https://jsonplaceholder.typicode.com/users");
     const json = await data.json();
@@ -19,8 +18,12 @@ const InfoCard = () => {
   const handleDelete=(id)=>{
     setUser(user.filter((item) => item.id !== id));
   }
-  const handleFollow=()=>{
-    setText((prevText) => (prevText === 'Follow' ? 'Unfollow' : 'Follow'));
+  const handleFollow=(id)=>{
+    setUser(users =>
+      users.map(item =>
+        item.id === id ? { ...item, isFollowing: !item.isFollowing } : item
+      )
+    );
   }
   return (
     <Flex
@@ -36,7 +39,7 @@ const InfoCard = () => {
           radius="md"
           withBorder
           w={{ base: '100%', sm: 400 }} 
-          h={500} 
+          h={500}
         >
           <Flex
             direction="column"
@@ -51,14 +54,14 @@ const InfoCard = () => {
               style={{ marginBottom: 16 }} 
             />
               <div style={{ textAlign: 'center' }} >
-                <Text weight={500} color='red' size='lg' font='bold'>{item?.name}{text==='Follow' ? ' ' : <IconStar color='black' size={18}/>}</Text>
+                <Text weight={500} color='red' size='lg' font='bold'>{item?.name}{item.isFollowing ? <IconStar color='black' size={18}/> : ' '}</Text>
                 <Text weight={600}>✉️{item?.email}</Text>
                 <Text weight={600}>📱{item?.phone}</Text>
                 <Text weight={600}>🌐{item?.website}</Text>
               </div>
 
             <Group justify='center' pt={14}>
-              <Button size='md' color="blue" leftSection={<IconAwardFilled size={14} />} onClick={handleFollow}>{text}</Button>
+              <Button size='md' color="blue" leftSection={<IconAwardFilled size={14} />} onClick={()=>handleFollow(item.id)}>{item.isFollowing ? 'Unfollow' : 'Follow'}</Button>
               <Button size='md' color="red" leftSection={<IconTrash size={14} />} onClick={()=>handleDelete(item.id)}>Delete</Button>
             </Group>
           </Flex>
